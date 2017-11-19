@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row">
         <!-- Display Validation Errors -->
-        <div class="panel">
-            Pagos y Favoritos de Usuario {{ $usuario->usuario }}
+        <div class="panel center">
+            <h3>Pagos y Favoritos de Usuario {{ $usuario->usuario }}</h3>
             @include('common.errors')
         </div>
         
