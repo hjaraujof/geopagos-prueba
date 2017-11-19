@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use App\Http\Requests\StoreUsuarioRequest as StoreUsuarioRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Usuario;
@@ -16,10 +16,22 @@ class UsuarioController extends Controller
         return view('usuarios.index', [ 'usuarios' => $usuarios, ]);
     }
 
+    public function detail(Request $request, Usuario $usuario)
+    {
+        return view('usuarios.detail', [ 'usuario' => $usuario,
+                                         'pagos' => $usuario->pagos()->get(), 
+                                         'favoritos' => $usuario->favoritos()->get(),
+                                         'usuarios' => Usuario::where('codigousuario', '!=', $usuario->codigousuario)
+                                                              ->whereNotIn('codigousuario', $usuario->favoritos()
+                                                                                                    ->pluck('codigousuariofavorito')
+                                                                                                    ->all())
+                                                              ->get(),]);
+    }
+
     public function store(StoreUsuarioRequest $request){
         
-        $request->usuario()->create([
-            'nombre' => $request->nombre,
+        Usuario::create([
+            'usuario' => $request->usuario,
             'clave' => $request->clave,
             'edad' => $request->edad
         ]);

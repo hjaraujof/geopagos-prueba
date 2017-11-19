@@ -1,30 +1,23 @@
-<form action="/pagos" method="POST" class="form-horizontal">
+<form action="/usuarios/{{$usuario->codigousuario}}/favoritos" method="POST" class="form-horizontal">
     {{ csrf_field() }}
 
     <div class="form-group">
-        <label for="pago-importe" class="col-sm-3 control-label">Importe</label>
+        <label for="codigousuariofavorito" class="col-sm-3 control-label">Usuario Favorito</label>
         <div class="col-sm-6">
-            <input type="text" name="importe" id="pago-importe" class="form-control">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="pago-fecha" class="col-sm-3 control-label">Fecha</label>
-        <div class="col-sm-6">
-            <input type="number" name="fecha" id="pago-fecha" class="form-control">
+            <input type="hidden" name="codigousuario" value="{{$usuario->codigousuario}}">
+            <select name="codigousuariofavorito" id="codigousuariofavorito" class="form-control">
+                @foreach ($usuarios as $usuariosel)
+                <option value="{{$usuariosel->codigousuario}}">{{$usuariosel->usuario}}</option>
+                @endforeach                
+            </select>
         </div>
     </div>
 
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-6">
             <button type="submit" class="btn btn-default">
-                <i class="fa fa-plus"></i> Agregar Usuario
+                <i class="fa fa-plus"></i> Agregar Favorito
             </button>
         </div>
     </div>
 </form>
-<script>
-  $( function() {
-    $( "#pago-fecha" ).datepicker({ minDate: 0 });
-  } );
-</script>

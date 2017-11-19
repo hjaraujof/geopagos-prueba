@@ -20,10 +20,11 @@
                                 <div>{{ $pago->fecha }}</div>
                             </td>
                             <td>
-                                <form action="/usuario/{{ $usuario->codigousuario }}/pagos/{{ $pago->codigopago }}" method="POST">
+                                <form action="{{ action('PagoController@destroy', ['usuario' => $usuario->codigousuario,
+                                                                                   'pago' => $pago->codigopago ]) }}" method="post">
                                     {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}                        
-                                    <button>Borrar</button>
+                                    {{ method_field('DELETE') }}
+                                    <button>Borrar Pago</button>
                                 </form>
                             </td>
                         </tr>

@@ -6,28 +6,28 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Favorito;
+use App\Usuario;
 
 class FavoritoController extends Controller
 {
-    public function indexUsuario(Request $request, Usuario $usuario)
-    {
-        $favoritos = Favorito::where('codigousuario', $usuario)->get();    
-        return view('favoritos.index', [ 'favoritos' => $favoritos, ]);
-    }
-
     public function store(Request $request, Usuario $usuario){
         
-        $request->favorito()->create([
-            'codigousuario' => $usuario,
-            'codigousuariofavorito' => $request->codigousuario,
+        Favorito::create([
+            'codigousuario' => $usuario->codigousuario,
+            'codigousuariofavorito' => $request->codigousuariofavorito,
         ]);
     
-        return redirect('favoritos', ['usuario' => $usuario->codigousuario]);
+        return redirect()->action(
+            'UsuarioController@detail', ['usuario' => $usuario]
+        );
     }
 
-    public function destroy(Request $request, Usuario $usuario, Favorito $favorito)
+    public function destroy(Request $request, Usuario $usuario, Usuario $usuariofavorito)
     {
-        $favorito->delete();        
-        return redirect('favoritos', ['usuario' => $usuario->codigousuario]);
+        $f = Favorito::where('codigousuario',$usuario->codigousuario)->where('codigousuariofavorito',$usuariofavorito->codigousuario);
+        $f->delete();
+        return redirect()->action(
+            'UsuarioController@detail', ['usuario' => $usuario]
+        );
     }
 }

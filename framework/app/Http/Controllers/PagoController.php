@@ -2,37 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use App\Http\Requests\StorePagoRequest as StorePagoRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Pago;
+use App\Usuariospago;
+use App\Usuario;
 
 class PagoController extends Controller
 {
-    public function indexUsuario(Request $request, Usuario $usuario)
-    {
-        $pagos = Usuario::pagos();    
-        return view('pagos.index', [ 'pagos' => $pagos, ]);
-    }
-
     public function store(StorePagoRequest $request, Usuario $usuario)
     {
-        $pago = $request->pago()->create([
+        $pago = Pago::create([
             'importe' => $request->importe,
-            'fecha' => $request->fecha,
+            'fecha' => date_format(date_create($request->fecha), 'Y-m-d H:i:s'),
+        ]);
+        
+        $up = Usuariospago::create([
+            'codigousuario' => $usuario->codigousuario,
+            'codigopago' => $pago->codigopago,
         ]);
 
-        $request->usuariopago()->create([
-            'codigousuario' => $usuario,
-            'codigopago' => $pago
-        ]);
-    
-        return redirect('pagos', ['usuario' => $usuario]);
+        $pago->codigousuariopago = $up->codigousuariopago;        
+        $pago->save();
+
+        return redirect()->action(
+            'UsuarioController@detail', ['usuario' => $usuario]
+        );
     }
 
     public function destroy(Request $request, Usuario $usuario, Pago $pago)
     {
+        $usuariopago = Usuariospago::where('codigopago',$pago->codigopago);
+        $usuariopago->delete();
         $pago->delete();        
-        return redirect('pagos', ['usuario' => $usuario]);
+        return redirect()->action(
+            'UsuarioController@detail', ['usuario' => $usuario]
+        );
     }
 }

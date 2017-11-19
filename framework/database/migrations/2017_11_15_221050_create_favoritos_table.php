@@ -18,10 +18,10 @@ class CreateFavoritosTable extends Migration
             $table->increments('codigofavorito');
             $table->integer('codigousuario')->unsigned();            
             $table->integer('codigousuariofavorito')->unsigned();
-            $table->foreign('codigousuario')->references('codigousuario')
-                                            ->on('usuarios')->onDelete('cascade');
-            $table->foreign('codigousuariofavorito')->references('codigousuario')
-                                                    ->on('usuarios')->onDelete('cascade');
+            $table->foreign('codigousuario')->references('codigousuario')->on('usuarios');
+            $table->foreign('codigousuariofavorito')->references('codigousuario')->on('usuarios');
+            $table->unique(['codigousuario', 'codigousuariofavorito']);
+            $table->timestamps();
         });
     }
 

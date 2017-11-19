@@ -13,7 +13,7 @@ class StoreUsuarioRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,9 +24,9 @@ class StoreUsuarioRequest extends FormRequest
     public function rules()
     {
         return [
-            'usuario' => 'required|unique|max:255',
+            'usuario' => 'required|unique:usuarios,usuario|max:255',
             'clave' => 'required|max:255',
-            'edad' => 'required|numeric|digits_between:18,999',
+            'edad' => 'required|numeric|between:18,999',
         ];
     }
 }

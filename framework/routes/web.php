@@ -15,13 +15,11 @@ Route::get('/','HomeController@index')->name('home');
 
 Route::get('/usuarios','UsuarioController@index')->name('usuarios');
 Route::post('/usuarios','UsuarioController@store');
-Route::delete('/usuarios/{usuario}','UsuarioController@detail');
+Route::get('/usuarios/{usuario}','UsuarioController@detail')->name('usuario_detail');
 Route::delete('/usuarios/{usuario}','UsuarioController@destroy');
 
-Route::get('/usuario/{usuario}/pagos','PagoController@indexUsuario')->name('pagos');
-Route::post('/usuario/{usuario}/pagos','PagoController@store');
-Route::delete('/usuario/{usuario}/pagos/{pago}','PagoController@destroy');
+Route::post('/usuarios/{usuario}/pagos','PagoController@store');
+Route::delete('/usuarios/{usuario}/pagos/{pago}','PagoController@destroy');
 
-Route::get('/usuario/{usuario}/favoritos','FavoritoController@indexUsuario')->name('favoritos');
-Route::post('/usuario/{usuario}/favoritos','FavoritoController@store');
-Route::delete('/usuario/{usuario}/favoritos/{favorito}','FavoritoController@destroy');
+Route::post('/usuarios/{usuario}/favoritos','FavoritoController@store');
+Route::delete('/usuarios/{usuario}/favoritos/{usuariofavorito}','FavoritoController@destroy');

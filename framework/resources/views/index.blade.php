@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -7,10 +7,8 @@
 
         <title>Laravel</title>
 
-        <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-        <!-- Styles -->
         <style>
             html, body {
                 background-color: #fff;
@@ -88,4 +86,5 @@
             </div>
         </div>
     </body>
-</html>
+</html>-->
+@include('layouts.app')

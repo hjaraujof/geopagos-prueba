@@ -1,4 +1,4 @@
-@if (count($pagos) > 0)
+@if (count($favoritos) > 0)
     <div class="panel panel-default">
         <div class="panel-heading">
             Favoritos
@@ -13,13 +13,15 @@
                     @foreach ($favoritos as $favorito)
                         <tr>
                             <td class="table-text">
-                                <div>{{ $favorito->codigousuariofavorito }}</div>
+                                <div>{{ $favorito->usuario }}</div>
                             </td>
                             <td>
-                                <form action="/usuario/{{ $usuario->codigousuario }}/favoritos/{{ $favorito->codigofavorito }}" method="POST">
+                                <form action="{{ action('FavoritoController@destroy', ['usuario' => $usuario->codigousuario,
+                                                                                       'usuariofavorito' => $favorito->codigousuario ]) }}" 
+                                                                                       method="POST">
                                     {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}                        
-                                    <button>Borrar</button>
+                                    {{ method_field('DELETE') }}
+                                    <button>Borrar Favorito</button>
                                 </form>
                             </td>
                         </tr>
@@ -29,3 +31,4 @@
         </div>
     </div>
 @endif
+{{print_r($favoritos)}}

@@ -18,6 +18,7 @@ class CreateUsuariosTable extends Migration
             $table->string('usuario')->unique();
             $table->string('clave');
             $table->integer('edad');
+            $table->timestamps();
         });
     }
 

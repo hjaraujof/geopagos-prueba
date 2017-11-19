@@ -19,7 +19,7 @@ class CreateUsuariospagosTable extends Migration
             $table->integer('codigopago')->unsigned();
             $table->integer('codigousuario')->unsigned();
             $table->foreign('codigopago')->references('codigopago')->on('pagos')->onDelete('cascade');
-            $table->foreign('codigousuario')->references('codigousuario')->on('usuarios')->onDelete('cascade');
+            $table->foreign('codigousuario')->references('codigousuario')->on('usuarios');
             $table->timestamps();
         });
     }

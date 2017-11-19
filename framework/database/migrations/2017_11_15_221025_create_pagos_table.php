@@ -15,8 +15,10 @@ class CreatePagosTable extends Migration
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->increments('codigopago');
-            $table->integer('importe');
+            $table->integer('codigousuariopago')->unsigned()->default(0);
+            $table->float('importe',24,2);
             $table->date('fecha');
+            $table->timestamps();
         });
     }
 

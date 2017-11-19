@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Usuario as Usuario;
+use App\Pago as Pago;
+use App\Favorito as Favorito;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -26,9 +29,9 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
-        $router->model('usuario', 'App\Usuario');
-        $router->model('Pago', 'App\Pago');
-        $router->model('favorito', 'App\Favorito');
+        Route::model('usuario', Usuario::class);
+        Route::model('pago', Pago::class);
+        Route::model('favorito', Favorito::class);
     }
 
     /**

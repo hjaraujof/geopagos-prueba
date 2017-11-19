@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pago extends Model
 {
-    //
-    public function usuario()
+    protected $primaryKey = 'codigopago';
+    protected $fillable = ['importe', 'fecha'];
+
+    public function usuariospago()
     {
-        return $this->belongsTo('App\Usuario')->using('App\UsuarioPago');
+        return $this->hasOne('App\Usuariospago','codigousuariopago','codigousuariopago');
     }
 }
