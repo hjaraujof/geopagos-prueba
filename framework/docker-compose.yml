@@ -10,15 +10,6 @@ services:
     environment:
       - "DB_PORT=3306"
       - "DB_HOST=database"
-  web:
-    build:
-      context: ./
-      dockerfile: web.dockerfile
-    working_dir: /var/www
-    volumes_from:
-      - app
-    ports:
-      - 80:80
   database:
     image: mysql:5.6
     volumes:
@@ -30,5 +21,17 @@ services:
       - "MYSQL_ROOT_PASSWORD=secret"
     ports:
         - "33061:3306"
+  web:
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    working_dir: /var/www
+    volumes_from:
+      - app
+    depends_on:
+      - app
+      - database
+    ports:
+      - 80:80  
 volumes:
   dbdata:
