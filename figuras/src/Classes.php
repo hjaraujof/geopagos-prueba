@@ -1,4 +1,7 @@
 <?php
+
+namespace Classes;
+
 class Figure{
 
     private $type=NULL;
@@ -39,7 +42,7 @@ class Figure{
 
 class Square extends Figure{
     
-    public function __construct($base,$height){ parent::__construct('square',$base,$height); }    
+    public function __construct($base){ parent::__construct('square',$base,$base); }    
 }
 
 class Triangle extends Figure{
