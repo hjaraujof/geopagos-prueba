@@ -43,7 +43,7 @@
 <div class="row">
     <div class="panel-body">
         <form action="index.php" method="POST" class="form-horizontal">
-            <input type="hidden" name="figua_def" value="1" >                
+            <input type="hidden" name="figura_def" value="1" >                
             <?php echo $campos; ?>
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">

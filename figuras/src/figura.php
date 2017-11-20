@@ -1,8 +1,9 @@
-<?php if(isset($_POST['tipo_figura'])&&isset($_POST['figura_def'])){
+<?php if(1){
     switch( $_POST['tipo_figura']){
         case 'cuadrado':
             $obj = new Square($_POST['lado']);
             $nombre = "Cuadrado";
+            var_dump($obj);
         break;
         case 'triangulo':
             $obj = new Triangle($_POST['base'],$_POST['altura']);
@@ -15,10 +16,11 @@
     }?>
 <div class="row">
     <div class="panel-body">
-        Figura: <?php echo $nombre; ?>
-        Base: <?php echo $obj->getBase(); ?>
-        Altura: <?php echo $obj->getHeigth(); ?>
-        Diámetro: <?php echo $obj->getDiameter(); ?>
+        Figura: <?php echo $nombre; ?> <br>
+        Base: <?php echo $obj->getBase(); ?> <br>
+        Altura: <?php echo $obj->getHeigth(); ?> <br>
+        Diámetro: <?php echo $obj->getDiameter(); ?> <br>
+        Área: <?php echo $obj->getArea(); ?> <br>
     </div>
 </div>
 
